@@ -1,5 +1,10 @@
 # Changelog
 
+## v4.1 - 2022-08-16
+
+- Add support for multi-modules maven projects
+- Add support for projects using maven wrapper (mvnw)
+
 ## v4 - 08/18/2021
 
 - Use `mvn` to detect project version instead of `grep`
