@@ -66,3 +66,9 @@ else
   git push $REPO --follow-tags
   git push $REPO --tags
 fi
+
+if [ "${NEW_VERSION}" != "${OLD_VERSION}" ]; then
+    echo "::set-output name=version-bumped::true"
+else
+    echo "::set-output name=version-bumped::false"
+fi

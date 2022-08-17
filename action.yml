@@ -29,11 +29,15 @@ outputs:
   version:
     description: 'The current version (whether updated or not)'
     value: ${{ steps.get-outputs.outputs.version }}
+  version-bumped:
+    description: 'Whether the version was bumped ("true") or not ("false")'
+    value: ${{ steps.bump-version.outputs.version-bumped }}
 
 runs:
   using: "composite"
   steps:
     - name: Bump Version
+      id: bump-version
       env:
         TOKEN: ${{ inputs.github-token }}
         EMAIL: ${{ inputs.git-email }}
