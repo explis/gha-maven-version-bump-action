@@ -49,6 +49,7 @@ if [[ "${BUMP_MODE}" == "none" ]]
 then
   echo "No matching commit tags found."
   echo "pom.xml at" $POMPATH "will remain at" $OLD_VERSION
+  echo "::set-output name=version-bumped::false"
 else
   echo $BUMP_MODE "version bump detected"
   bump $BUMP_MODE $OLD_VERSION
@@ -65,10 +66,5 @@ else
   git tag $NEW_VERSION
   git push $REPO --follow-tags
   git push $REPO --tags
-fi
-
-if [ "${NEW_VERSION}" != "${OLD_VERSION}" ]; then
-    echo "::set-output name=version-bumped::true"
-else
-    echo "::set-output name=version-bumped::false"
+  echo "::set-output name=version-bumped::true"
 fi
