@@ -55,4 +55,4 @@ runs:
       shell: bash
       run: |
         echo 'Version is now ${{ steps.get-outputs.outputs.version }}'
-        echo 'Version bumped? '${{ steps.bump-version.outputs.version-bumped }}'"
+        echo "Version bumped? '${{ steps.bump-version.outputs.version-bumped }}'"
