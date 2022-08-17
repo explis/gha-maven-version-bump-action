@@ -53,5 +53,6 @@ runs:
       run: echo "::set-output name=version::$(${{github.action_path}}/get-version.sh)"
     - name: Result
       shell: bash
-      run: "echo 'Version is now ${{ steps.get-outputs.outputs.version }}'"
-
+      run: |
+        echo 'Version is now ${{ steps.get-outputs.outputs.version }}'
+        echo 'Version bumped? '${{ steps.bump-version.outputs.version-bumped }}'
