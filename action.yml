@@ -24,6 +24,10 @@ inputs:
     description: 'The name to use for the version bump commit. e.g. github.actor'
     required: true
     default: github-actions[bot]
+  extra-maven-args:
+    description:  'Additional arguments / goals appended to the maven versions:set command'
+    required:  false
+    default: '-q'
 
 outputs:
   version:
@@ -43,6 +47,7 @@ runs:
         EMAIL: ${{ inputs.git-email }}
         NAME: ${{ inputs.git-username }}
         POMPATH: ${{ inputs.pom-path }}
+        EXTRA_MAVEN_ARGS: ${{ inputs.extra-maven-args }}
       run: ${{github.action_path}}/version-bump.sh
       shell: bash
     - name: Set outputs

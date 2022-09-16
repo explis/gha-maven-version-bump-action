@@ -17,7 +17,7 @@ function bump {
   local mode="$1"
   local old="$2"
   local parts=( ${old//./ } )
-  case "$1" in
+  case "$mode" in
     major)
       local bv=$((parts[0] + 1))
       NEW_VERSION="${bv}.0.0"
@@ -61,8 +61,8 @@ else
   else
     MAVEN="mvn"
   fi
-  "$MAVEN" -f "$POMPATH" -q versions:set -DnewVersion="${NEW_VERSION}"
-  git add -v "$POMPATH/**pom.xml"
+  "$MAVEN" -f "$POMPATH" versions:set -DnewVersion="${NEW_VERSION}" ${EXTRA_MAVEN_ARGS:-}
+  git add -v "$POMPATH"
   REPO="https://$GITHUB_ACTOR:$TOKEN@github.com/$GITHUB_REPOSITORY.git"
   git commit -m "Bump pom.xml from $OLD_VERSION to $NEW_VERSION"
   git tag $NEW_VERSION
